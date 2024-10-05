@@ -16,4 +16,7 @@ position = Vector2(-53, 0)
 zoom = Vector2(4, 4)
 
 [node name="Player" parent="." instance=ExtResource("3_ijue1")]
+unique_name_in_owner = true
 position = Vector2(-16, -8)
+
+[connection signal="capture" from="Player" to="Enemy" method="_on_player_capture"]

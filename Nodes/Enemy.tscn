@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bk2148vs0iis6"]
+[gd_scene load_steps=13 format=3 uid="uid://bk2148vs0iis6"]
 
 [ext_resource type="Texture2D" uid="uid://c2uf60rcut8o" path="res://Assets/Sprites/enemy.png" id="1_1jt7x"]
 [ext_resource type="Script" path="res://Scripts/EnemyController.gd" id="1_oqb8d"]
@@ -72,6 +72,8 @@ animations = [{
 "speed": 3.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_s6kcj"]
+
 [node name="Blob" type="Area2D"]
 script = ExtResource("1_oqb8d")
 JUMP_VELOCIY = -16.0
@@ -81,3 +83,6 @@ sprite_frames = SubResource("SpriteFrames_cuf1f")
 animation = &"Moving"
 autoplay = "Moving"
 frame_progress = 0.199459
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_s6kcj")
