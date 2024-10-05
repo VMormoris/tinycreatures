@@ -61,7 +61,7 @@ script = ExtResource("1_pwwfk")
 sprite_frames = SubResource("SpriteFrames_rrr48")
 animation = &"Idle"
 autoplay = "Idle"
-frame_progress = 0.0952903
+frame_progress = 0.167059
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(28, 3)

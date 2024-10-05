@@ -27,6 +27,8 @@ func _process(delta: float) -> void:
 	
 func chase_player(delta: float) -> void:
 	dir = (player.position - position).normalized()
+	select_orientation(dir)
+	
 	if sr.frame > 1:
 		position += SPEED * delta * dir
 		if touching_ground:
@@ -34,11 +36,17 @@ func chase_player(delta: float) -> void:
 			touching_ground = false
 	elif sr.frame <= 1:
 		touching_ground = true	
-	
+
 func apply_gravity(delta: float) -> void:
 	if not touching_ground:
 		position.y += velocity_y * delta + 0.5 * g * delta * delta
 		velocity_y += g * delta
+		
+func select_orientation(dir: Vector2) -> void:
+	if dir.x < 0:
+		sr.flip_h = true
+	else:
+		sr.flip_h = false
 
 func moveToPlayer(delta: float) -> void:
 	print("Elo")
