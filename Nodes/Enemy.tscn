@@ -1,0 +1,83 @@
+[gd_scene load_steps=12 format=3 uid="uid://bk2148vs0iis6"]
+
+[ext_resource type="Texture2D" uid="uid://c2uf60rcut8o" path="res://Assets/Sprites/enemy.png" id="1_1jt7x"]
+[ext_resource type="Script" path="res://Scripts/EnemyController.gd" id="1_oqb8d"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mintd"]
+atlas = ExtResource("1_1jt7x")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iw1gk"]
+atlas = ExtResource("1_1jt7x")
+region = Rect2(8, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_egyi8"]
+atlas = ExtResource("1_1jt7x")
+region = Rect2(16, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_key21"]
+atlas = ExtResource("1_1jt7x")
+region = Rect2(24, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lonji"]
+atlas = ExtResource("1_1jt7x")
+region = Rect2(0, 8, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4uy6k"]
+atlas = ExtResource("1_1jt7x")
+region = Rect2(8, 8, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tv751"]
+atlas = ExtResource("1_1jt7x")
+region = Rect2(16, 8, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q4rgx"]
+atlas = ExtResource("1_1jt7x")
+region = Rect2(24, 8, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cuf1f"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mintd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iw1gk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_egyi8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_key21")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lonji")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4uy6k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tv751")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q4rgx")
+}],
+"loop": true,
+"name": &"Moving",
+"speed": 3.0
+}]
+
+[node name="Blob" type="Area2D"]
+script = ExtResource("1_oqb8d")
+JUMP_VELOCIY = -16.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_cuf1f")
+animation = &"Moving"
+autoplay = "Moving"
+frame_progress = 0.199459

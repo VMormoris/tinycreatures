@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://cjhgksjbc0fuu"]
+
+[ext_resource type="Texture2D" uid="uid://bmtfol3irxq7e" path="res://Assets/3rdParty/Sprites/brackeys/knight.png" id="1_s5gxh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v5o8q"]
+atlas = ExtResource("1_s5gxh")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4frcv"]
+atlas = ExtResource("1_s5gxh")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r4lah"]
+atlas = ExtResource("1_s5gxh")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oiiei"]
+atlas = ExtResource("1_s5gxh")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rrr48"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v5o8q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4frcv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r4lah")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oiiei")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 10.0
+}]
+
+[node name="Player" type="CharacterBody2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_rrr48")
+animation = &"Idle"
+autoplay = "Idle"
+frame_progress = 0.836633
