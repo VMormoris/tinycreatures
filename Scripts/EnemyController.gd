@@ -12,7 +12,7 @@ var COLOR_PALETTE: Array[Color] = [
 
 @export var SPEED: float = 60.0
 @export var JUMP_VELOCIY: float = -10.0
-@export var PERSONALITY: ATTITUDE = ATTITUDE.Passive
+@export var PERSONALITY: ATTITUDE = ATTITUDE.Agressive
 
 @onready var sr: AnimatedSprite2D = $AnimatedSprite2D
 var player: CharacterBody2D = null
