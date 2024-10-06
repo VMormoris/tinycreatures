@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cjhgksjbc0fuu"]
+[gd_scene load_steps=14 format=3 uid="uid://cjhgksjbc0fuu"]
 
 [ext_resource type="Script" path="res://Scripts/PlayerController.gd" id="1_pwwfk"]
 [ext_resource type="Texture2D" uid="uid://dyb2rkfol5mk8" path="res://Assets/Sprites/Senku.png" id="2_0aayb"]
@@ -35,10 +35,6 @@ region = Rect2(0, 32, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_4vwyq"]
 atlas = ExtResource("2_0aayb")
 region = Rect2(64, 32, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_lcih8"]
-atlas = ExtResource("2_0aayb")
-region = Rect2(128, 32, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f7ss5"]
 atlas = ExtResource("2_0aayb")
@@ -77,7 +73,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_4vwyq")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_lcih8")
+"texture": SubResource("AtlasTexture_5p8ui")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_f7ss5")
@@ -95,7 +91,7 @@ range = NodePath("Sprite2D/Area2D")
 sprite_frames = SubResource("SpriteFrames_rrr48")
 animation = &"Running"
 autoplay = "Running"
-frame_progress = 0.718382
+frame_progress = 0.201449
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(28, 3)
