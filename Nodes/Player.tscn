@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cjhgksjbc0fuu"]
+[gd_scene load_steps=15 format=3 uid="uid://cjhgksjbc0fuu"]
 
 [ext_resource type="Script" path="res://Scripts/PlayerController.gd" id="1_pwwfk"]
 [ext_resource type="Texture2D" uid="uid://dyb2rkfol5mk8" path="res://Assets/Sprites/Senku.png" id="2_0aayb"]
@@ -28,6 +28,22 @@ region = Rect2(128, 0, 32, 32)
 atlas = ExtResource("2_0aayb")
 region = Rect2(160, 0, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_5p8ui"]
+atlas = ExtResource("2_0aayb")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4vwyq"]
+atlas = ExtResource("2_0aayb")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lcih8"]
+atlas = ExtResource("2_0aayb")
+region = Rect2(128, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f7ss5"]
+atlas = ExtResource("2_0aayb")
+region = Rect2(192, 32, 32, 32)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_rrr48"]
 animations = [{
 "frames": [{
@@ -52,6 +68,23 @@ animations = [{
 "loop": true,
 "name": &"Idle",
 "speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5p8ui")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4vwyq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lcih8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f7ss5")
+}],
+"loop": true,
+"name": &"Running",
+"speed": 4.0
 }]
 
 [node name="Player" type="CharacterBody2D"]
@@ -59,9 +92,9 @@ script = ExtResource("1_pwwfk")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_rrr48")
-animation = &"Idle"
-autoplay = "Idle"
-frame_progress = 0.167059
+animation = &"Running"
+autoplay = "Running"
+frame_progress = 0.718382
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(28, 3)
