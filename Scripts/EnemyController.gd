@@ -15,7 +15,7 @@ var COLOR_PALETTE: Array[Color] = [
 @export var PERSONALITY: ATTITUDE = ATTITUDE.Passive
 
 @onready var sr: AnimatedSprite2D = $AnimatedSprite2D
-@onready var player: CharacterBody2D = %Player
+var player: CharacterBody2D = null
 
 var dir: Vector2 = Vector2.ZERO
 var velocity_y: float = 0.0
@@ -26,6 +26,8 @@ var chasing: bool = true
 var color: Color
 
 func _ready() -> void:
+	if player == null:
+		player = get_node("%Player")
 	var idx = randi_range(0, COLOR_PALETTE.size() - 1)
 	sr.modulate = COLOR_PALETTE[idx]
 
