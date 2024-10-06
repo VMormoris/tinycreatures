@@ -1,6 +1,7 @@
 extends Node2D
 
 @onready var player: PlayerController = $".."
+var magazine: Array[Color]
 var ammo: int = 0
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -20,9 +21,12 @@ func draw_backpack() -> void:
 	var it = -1 if player.sr.flip_v else 1
 
 	# Fill backpack
+	var color_idx = 0
 	for i in range(start, end, it):
 		var sprite: Sprite2D = get_child(i)
 		sprite.visible = true
+		sprite.modulate = magazine[color_idx]
+		color_idx += 1
 	
 func fake_animation() -> void:
 	if player.velocity == Vector2.ZERO:
@@ -45,10 +49,12 @@ func fake_running_animation() -> void:
 	# Move on x axis based on which frame
 	position.x = 0 if player.sr.frame % 2 == 0 else 1
 
-func add_ammo() -> void:
+func add_ammo(color: Color) -> void:
 	ammo += 1
 	ammo = clampi(ammo, 0, 11)
+	magazine.push_back(color)
 	
 func remove_ammo() -> void:
 	ammo -= 1
 	ammo = clampi(ammo, 0, 11)
+	magazine.pop_front()

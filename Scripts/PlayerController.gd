@@ -55,9 +55,9 @@ func absorb_enemy(enemy: Area2D, delta: float) -> void:
 	dir = (enemy.position - position).normalized()
 	enemy.position -= (SPEED/2) * delta * dir
 	if(enemy.position.distance_to(position) < 10):
-		enemy.queue_free()
-		backpack.add_ammo()
+		backpack.add_ammo(enemy.sr.modulate)
 		limit_vaccum -= 1
+		enemy.queue_free()
 
 func _on_area_2d_area_exited(area: Area2D) -> void:
 	if(range.get_overlapping_areas() == null):

@@ -1,7 +1,15 @@
 extends Area2D
 
-const g: float = 50.0
 enum ATTITUDE {Agressive, Passive, Scared}
+
+const g: float = 50.0
+var COLOR_PALETTE: Array[Color] = [
+	Color8(116, 246, 247),
+	Color8(255, 117, 3),
+	Color8(216, 115, 133),
+	Color8(170, 90, 150),
+]
+
 @export var SPEED: float = 60.0
 @export var JUMP_VELOCIY: float = -10.0
 @export var PERSONALITY: ATTITUDE = ATTITUDE.Passive
@@ -15,6 +23,11 @@ var touching_ground: bool = true
 
 var ableToMove: bool = true
 var chasing: bool = true
+var color: Color
+
+func _ready() -> void:
+	var idx = randi_range(0, COLOR_PALETTE.size() - 1)
+	sr.modulate = COLOR_PALETTE[idx]
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
