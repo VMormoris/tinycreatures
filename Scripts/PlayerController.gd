@@ -3,8 +3,11 @@ extends CharacterBody2D
 signal capture
 signal release
 
-const SPEED = 300.0
+@export var range: Area2D
+const SPEED = 150.0
+var dir: Vector2 = Vector2.ZERO
 var succ = false
+var limit_vaccum: int = 0
 
 @onready var sr: AnimatedSprite2D = $AnimatedSprite2D
 
@@ -16,13 +19,19 @@ func _physics_process(delta: float) -> void:
 
 	var direction := Input.get_vector("Left", "Right", "Up", "Down")
 	velocity = direction * SPEED
-	Shoot()
+	Shoot(delta)
 	move_and_slide()
 
-func Shoot() -> void:
+func Shoot(delta: float) -> void:
 	if(Input.is_action_pressed("Shoot") && succ):
+		limit_vaccum = 0
+		for enemy in range.get_overlapping_areas():
+			if(limit_vaccum < 5):
+				absorb_enemy(enemy, delta)
+				limit_vaccum += 1
 		capture.emit()
 	elif(Input.is_action_just_released("Shoot")):
+		limit_vaccum = 0
 		release.emit()
 
 func select_orientation() -> void:
@@ -44,6 +53,13 @@ func get_mouse_relative_dir() -> Vector2:
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	succ = true
 
+func absorb_enemy(enemy: Area2D, delta: float) -> void:
+	dir = (enemy.position - position).normalized()
+	enemy.position -= (SPEED/2) * delta * dir
+	if(enemy.position.distance_to(position) < 10):
+		enemy.queue_free()
+		limit_vaccum -= 1
 
 func _on_area_2d_area_exited(area: Area2D) -> void:
-	succ = false
+	if(range.get_overlapping_areas() == null):
+		succ = false
