@@ -1,3 +1,4 @@
+class_name PlayerController
 extends CharacterBody2D
 
 signal capture
@@ -10,6 +11,7 @@ var succ = false
 var limit_vaccum: int = 0
 
 @onready var sr: AnimatedSprite2D = $AnimatedSprite2D
+@onready var backpack = $Backpack
 
 func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
@@ -19,6 +21,7 @@ func _physics_process(delta: float) -> void:
 
 	var direction := Input.get_vector("Left", "Right", "Up", "Down")
 	velocity = direction * SPEED
+	select_animation()
 	Shoot(delta)
 	move_and_slide()
 
@@ -36,12 +39,7 @@ func Shoot(delta: float) -> void:
 
 func select_orientation() -> void:
 	var mouse_dir = get_mouse_relative_dir()
-	if mouse_dir.x < 0:
-		#sr.flip_h = true
-		sr.flip_v = true
-	else:
-		#sr.flip_h = false
-		sr.flip_v = false
+	sr.flip_v = mouse_dir.x < 0
 
 func get_mouse_relative_dir() -> Vector2:
 	var half_size = get_viewport_rect().size * 0.5
@@ -58,8 +56,15 @@ func absorb_enemy(enemy: Area2D, delta: float) -> void:
 	enemy.position -= (SPEED/2) * delta * dir
 	if(enemy.position.distance_to(position) < 10):
 		enemy.queue_free()
+		backpack.add_ammo()
 		limit_vaccum -= 1
 
 func _on_area_2d_area_exited(area: Area2D) -> void:
 	if(range.get_overlapping_areas() == null):
 		succ = false
+
+func select_animation():
+	if velocity == Vector2.ZERO:
+		sr.play("Idle")
+	else:
+		sr.play("Running")
