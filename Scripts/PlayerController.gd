@@ -12,6 +12,7 @@ var limit_vaccum: int = 0
 var hp: int = 100
 
 @onready var sr: AnimatedSprite2D = $AnimatedSprite2D
+@onready var asp: AudioStreamPlayer2D = $AudioStreamPlayer2D
 @onready var backpack = $Backpack
 
 func _physics_process(delta: float) -> void:
@@ -33,9 +34,12 @@ func Shoot(delta: float) -> void:
 			if(limit_vaccum < 5):
 				absorb_enemy(enemy, delta)
 				limit_vaccum += 1
+		if not asp.playing:
+			asp.play()
 		capture.emit()
 	elif(Input.is_action_just_released("Shoot")):
 		limit_vaccum = 0
+		asp.stop()
 		release.emit()
 
 func select_orientation() -> void:
