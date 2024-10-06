@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Scripts/GameManager.gd" id="1_u1rcp"]
 [ext_resource type="PackedScene" uid="uid://bk2148vs0iis6" path="res://Nodes/Enemy.tscn" id="2_21i01"]
 [ext_resource type="PackedScene" uid="uid://cjhgksjbc0fuu" path="res://Nodes/Player.tscn" id="3_ijue1"]
-[ext_resource type="Script" path="res://Scenes/camera_controller.gd" id="3_xnd8x"]
+[ext_resource type="Script" path="res://Scripts/CameraController.gd" id="4_en7fd"]
 
 [node name="Test" type="Node2D"]
 script = ExtResource("1_u1rcp")
@@ -18,7 +18,7 @@ position = Vector2(-53, 0)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(4, 4)
-script = ExtResource("3_xnd8x")
+script = ExtResource("4_en7fd")
 
 [node name="Player" parent="." instance=ExtResource("3_ijue1")]
 unique_name_in_owner = true

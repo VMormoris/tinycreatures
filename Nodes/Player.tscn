@@ -1,10 +1,11 @@
-[gd_scene load_steps=17 format=3 uid="uid://cjhgksjbc0fuu"]
+[gd_scene load_steps=18 format=3 uid="uid://cjhgksjbc0fuu"]
 
 [ext_resource type="Script" path="res://Scripts/PlayerController.gd" id="1_pwwfk"]
 [ext_resource type="Texture2D" uid="uid://dyb2rkfol5mk8" path="res://Assets/Sprites/Senku.png" id="2_0aayb"]
 [ext_resource type="Texture2D" uid="uid://dh1cls78oxbjc" path="res://Assets/Sprites/Triangle.png" id="3_eccgw"]
 [ext_resource type="Script" path="res://Scripts/BackpackController.gd" id="4_3n0o5"]
 [ext_resource type="Texture2D" uid="uid://chjd3qkye5xwq" path="res://Assets/Sprites/WhitePixel.png" id="4_l280c"]
+[ext_resource type="Script" path="res://Scripts/SuckingAreaController.gd" id="4_p1w20"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v7xne"]
 atlas = ExtResource("2_0aayb")
@@ -89,25 +90,12 @@ animations = [{
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("range")]
 script = ExtResource("1_pwwfk")
-range = NodePath("Sprite2D/Vacuum")
+range = NodePath("VacumPivot/Sprite2D/Vacuum")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_rrr48")
 animation = &"Idle"
 autoplay = "Running"
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(28, 3)
-rotation = -1.5708
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("3_eccgw")
-
-[node name="Vacuum" type="Area2D" parent="Sprite2D"]
-collision_layer = 2
-collision_mask = 2
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Sprite2D/Vacuum"]
-polygon = PackedVector2Array(-12.5, -250, 162.5, 344, -187.5, 344)
 
 [node name="Backpack" type="Node2D" parent="."]
 script = ExtResource("4_3n0o5")
@@ -185,6 +173,21 @@ position = Vector2(-2, 4)
 scale = Vector2(0.7, 0.7)
 shape = SubResource("CircleShape2D_m6ge3")
 
-[connection signal="area_entered" from="Sprite2D/Vacuum" to="." method="_on_area_2d_area_entered"]
-[connection signal="area_exited" from="Sprite2D/Vacuum" to="." method="_on_area_2d_area_exited"]
+[node name="VacumPivot" type="Node2D" parent="."]
+script = ExtResource("4_p1w20")
+
+[node name="Sprite2D" type="Sprite2D" parent="VacumPivot"]
+rotation = -1.5708
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("3_eccgw")
+
+[node name="Vacuum" type="Area2D" parent="VacumPivot/Sprite2D"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="VacumPivot/Sprite2D/Vacuum"]
+polygon = PackedVector2Array(-12.5, -250, 162.5, 344, -187.5, 344)
+
 [connection signal="area_shape_entered" from="Hitbox" to="." method="_on_hitbox_area_shape_entered"]
+[connection signal="area_entered" from="VacumPivot/Sprite2D/Vacuum" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="VacumPivot/Sprite2D/Vacuum" to="." method="_on_area_2d_area_exited"]
