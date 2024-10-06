@@ -14,22 +14,23 @@ var velocity_y: float = 0.0
 var touching_ground: bool = true
 
 var ableToMove: bool = true
+var chasing: bool = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	match PERSONALITY:
 		ATTITUDE.Agressive:
-			chase_player(delta)
+			chase_or_run_from_player(delta)
 		#ATTITUDE.Passive:
 		#	print("Passive")
 #		
 	
-func chase_player(delta: float) -> void:
+func chase_or_run_from_player(delta: float) -> void:
 	dir = (player.position - position).normalized()
 	select_orientation(dir)
-	
+	var multiplier =  1 if chasing else -1
 	if sr.frame > 1:
-		position += SPEED * delta * dir
+		position += SPEED * delta * multiplier * dir
 		if touching_ground:
 			velocity_y = JUMP_VELOCIY
 			touching_ground = false
