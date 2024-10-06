@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://b35avikr04ech"]
+
+[ext_resource type="Script" path="res://LightingController.gd" id="1_6exfw"]
+
+[node name="Lighting" type="Line2D"]
+width = 1.0
+script = ExtResource("1_6exfw")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]

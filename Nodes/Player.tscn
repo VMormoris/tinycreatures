@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cjhgksjbc0fuu"]
+[gd_scene load_steps=20 format=3 uid="uid://cjhgksjbc0fuu"]
 
 [ext_resource type="Script" path="res://Scripts/PlayerController.gd" id="1_pwwfk"]
 [ext_resource type="Texture2D" uid="uid://dyb2rkfol5mk8" path="res://Assets/Sprites/Senku.png" id="2_0aayb"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://chjd3qkye5xwq" path="res://Assets/Sprites/WhitePixel.png" id="4_l280c"]
 [ext_resource type="Script" path="res://Scripts/SuckingAreaController.gd" id="4_p1w20"]
 [ext_resource type="AudioStream" uid="uid://bsbte08no3rj6" path="res://Assets/SFX/vacuum.wav" id="7_vsxnt"]
+[ext_resource type="PackedScene" uid="uid://b2is6y0wc05m0" path="res://Nodes/LightingGenerator.tscn" id="8_wwhs1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v7xne"]
 atlas = ExtResource("2_0aayb")
@@ -175,6 +176,7 @@ scale = Vector2(0.7, 0.7)
 shape = SubResource("CircleShape2D_m6ge3")
 
 [node name="VacumPivot" type="Node2D" parent="."]
+position = Vector2(32, 11)
 script = ExtResource("4_p1w20")
 
 [node name="Sprite2D" type="Sprite2D" parent="VacumPivot"]
@@ -191,6 +193,16 @@ polygon = PackedVector2Array(-12.5, -250, 162.5, 344, -187.5, 344)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("7_vsxnt")
+
+[node name="LightingPivot" type="Node2D" parent="."]
+position = Vector2(14, 12)
+script = ExtResource("4_p1w20")
+
+[node name="LightingGenerator" parent="LightingPivot" instance=ExtResource("8_wwhs1")]
+
+[node name="Sprite2D" type="Sprite2D" parent="LightingPivot"]
+modulate = Color(0.972549, 0, 0, 1)
+texture = ExtResource("4_l280c")
 
 [connection signal="area_shape_entered" from="Hitbox" to="." method="_on_hitbox_area_shape_entered"]
 [connection signal="area_entered" from="VacumPivot/Sprite2D/Vacuum" to="." method="_on_area_2d_area_entered"]

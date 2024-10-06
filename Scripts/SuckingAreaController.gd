@@ -1,8 +1,8 @@
 extends Node2D
 
 @onready var player: PlayerController = $".."
-const BASE_PIVOT: Vector2 = Vector2(32, 11)
-const FLIP_BASE_PIVOT: Vector2 = Vector2(32, -13)
+const BASE_PIVOT_Y: float = 11
+const FLIP_BASE_PIVOT_Y: float = -13
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -16,7 +16,7 @@ func fake_animation() -> void:
 		fake_running_animation()
 
 func fake_idle_animation() -> void:
-	position = FLIP_BASE_PIVOT if player.sr.flip_v else BASE_PIVOT
+	position.y = FLIP_BASE_PIVOT_Y if player.sr.flip_v else BASE_PIVOT_Y
 	match player.sr.frame:
 		1, 4:
 			position.y += 1 if player.sr.flip_v else -1
@@ -24,4 +24,4 @@ func fake_idle_animation() -> void:
 			position.y += 2 if player.sr.flip_v else -2
 
 func fake_running_animation() -> void:
-	position = FLIP_BASE_PIVOT if player.sr.flip_v else BASE_PIVOT
+	position.y = FLIP_BASE_PIVOT_Y if player.sr.flip_v else BASE_PIVOT_Y
