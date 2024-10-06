@@ -17,21 +17,12 @@ var ableToMove: bool = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	#chase_player(delta)
-	#apply_gravity(delta)
-	if(!ableToMove):
-		being_absorbed(delta)
-	else:
-		match PERSONALITY:
-			ATTITUDE.Agressive:
-				chase_player(delta)
-			#ATTITUDE.Passive:
-			#	print("Passive")
-#		moveHorizontally(delta)
-#		moveVertically(delta)
-#	else:
-#		moveToPlayer(delta)
-#		ableToMove = true
+	match PERSONALITY:
+		ATTITUDE.Agressive:
+			chase_player(delta)
+		#ATTITUDE.Passive:
+		#	print("Passive")
+#		
 	
 func chase_player(delta: float) -> void:
 	dir = (player.position - position).normalized()
@@ -55,17 +46,3 @@ func select_orientation(dir: Vector2) -> void:
 		sr.flip_h = true
 	else:
 		sr.flip_h = false
-
-func being_absorbed(delta: float) -> void:
-	dir = (player.position - position).normalized()
-	select_orientation(dir)
-	position += (SPEED/2) * delta * dir
-	if position.distance_to(player.position) < 10:
-		queue_free()
-
-func _on_player_capture() -> void:
-	ableToMove = false
-
-
-func _on_player_release() -> void:
-	ableToMove = true
