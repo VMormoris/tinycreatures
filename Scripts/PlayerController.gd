@@ -9,6 +9,7 @@ const SPEED = 150.0
 var dir: Vector2 = Vector2.ZERO
 var succ = false
 var limit_vaccum: int = 0
+var hp: int = 100
 
 @onready var sr: AnimatedSprite2D = $AnimatedSprite2D
 @onready var backpack = $Backpack
@@ -54,7 +55,7 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 func absorb_enemy(enemy: Area2D, delta: float) -> void:
 	dir = (enemy.position - position).normalized()
 	enemy.position -= (SPEED/2) * delta * dir
-	if(enemy.position.distance_to(position) < 10):
+	if(enemy.position.distance_to(position) < 25):
 		backpack.add_ammo(enemy.sr.modulate)
 		limit_vaccum -= 1
 		enemy.queue_free()
@@ -68,3 +69,9 @@ func select_animation():
 		sr.play("Idle")
 	else:
 		sr.play("Running")
+
+
+func _on_hitbox_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
+	hp -= 1
+	print(hp)
+	area.queue_free()

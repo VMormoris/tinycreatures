@@ -75,6 +75,8 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_s6kcj"]
 
 [node name="Blob" type="Area2D"]
+collision_layer = 3
+collision_mask = 3
 script = ExtResource("1_oqb8d")
 JUMP_VELOCIY = -16.0
 
