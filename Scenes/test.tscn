@@ -1,11 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://d27ke7a8nupae"]
+[gd_scene load_steps=6 format=3 uid="uid://d27ke7a8nupae"]
 
 [ext_resource type="PackedScene" uid="uid://bp8onyfnkd0wt" path="res://Nodes/MainMap.tscn" id="1_ia3pn"]
+[ext_resource type="Script" path="res://Scripts/GameManager.gd" id="1_u1rcp"]
 [ext_resource type="PackedScene" uid="uid://bk2148vs0iis6" path="res://Nodes/Enemy.tscn" id="2_21i01"]
 [ext_resource type="PackedScene" uid="uid://cjhgksjbc0fuu" path="res://Nodes/Player.tscn" id="3_ijue1"]
 [ext_resource type="Script" path="res://Scenes/camera_controller.gd" id="3_xnd8x"]
 
 [node name="Test" type="Node2D"]
+script = ExtResource("1_u1rcp")
+slime_scene = ExtResource("2_21i01")
 
 [node name="MapSection" parent="." instance=ExtResource("1_ia3pn")]
 position = Vector2(80, 13)
@@ -21,4 +24,10 @@ script = ExtResource("3_xnd8x")
 unique_name_in_owner = true
 position = Vector2(-16, -8)
 
+[node name="SlimeTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
 [connection signal="capture" from="Player" to="Enemy" method="_on_player_capture"]
+[connection signal="release" from="Player" to="Enemy" method="_on_player_release"]
+[connection signal="timeout" from="SlimeTimer" to="." method="_on_slime_timer_timeout"]
