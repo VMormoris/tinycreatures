@@ -31,5 +31,5 @@ func _on_slime_timer_timeout() -> void:
 		#print(spawnpos)
 		
 		slime.position = spawnpos
-		
+		slime.player = player
 		add_child(slime)
