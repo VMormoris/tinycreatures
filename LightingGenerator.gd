@@ -54,7 +54,7 @@ func sub_forkify(normal: Vector2, point: Vector2) -> void:
 
 	
 func find_target() -> Vector2:
-	print("Mouse: [", get_global_mouse_position().x, ",", get_global_mouse_position().y, "]")
+	print("Mouse: [", get_local_mouse_position().x, ",", get_local_mouse_position().y, "]")
 	print("Pos: [", position.x, ",", position.y, "]")
-	var dir = (get_global_mouse_position() - position).normalized()
+	var dir = (get_local_mouse_position() - position).normalized()
 	return position + dir * attack_range
