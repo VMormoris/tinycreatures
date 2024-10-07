@@ -84,7 +84,6 @@ JUMP_VELOCIY = -16.0
 sprite_frames = SubResource("SpriteFrames_cuf1f")
 animation = &"Moving"
 autoplay = "Moving"
-frame_progress = 0.199459
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_s6kcj")

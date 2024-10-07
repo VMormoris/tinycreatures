@@ -98,4 +98,5 @@ func _on_hitbox_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index
 		$"../Camera2D/ColorRect".visible = true
 		$"../Camera2D/Dead".visible = true
 		get_tree().paused = true
-	area.queue_free()
+	if area.get_meta("self") != null:
+		area.get_meta("self").HP -= 1

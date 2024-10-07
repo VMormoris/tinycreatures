@@ -67,9 +67,6 @@ slime_scene = ExtResource("2_21i01")
 [node name="MapSection" parent="." instance=ExtResource("1_ia3pn")]
 position = Vector2(80, 13)
 
-[node name="Enemy" parent="." instance=ExtResource("2_21i01")]
-position = Vector2(-53, 0)
-
 [node name="Player" parent="." instance=ExtResource("3_ijue1")]
 unique_name_in_owner = true
 position = Vector2(-16, -8)
@@ -138,7 +135,5 @@ libraries = {
 wait_time = 15.0
 autostart = true
 
-[connection signal="capture" from="Player" to="Enemy" method="_on_player_capture"]
-[connection signal="release" from="Player" to="Enemy" method="_on_player_release"]
 [connection signal="timeout" from="SlimeTimer" to="." method="_on_slime_timer_timeout"]
 [connection signal="timeout" from="Day_Night" to="." method="_on_day_night_timeout"]
