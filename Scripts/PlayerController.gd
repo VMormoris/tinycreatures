@@ -8,8 +8,10 @@ signal release
 const SPEED = 150.0
 var dir: Vector2 = Vector2.ZERO
 var succ = false
+var overheated = false
 var limit_vaccum: int = 0
 var hp: int = 100
+var overheat = 0
 
 @onready var sr: AnimatedSprite2D = $AnimatedSprite2D
 @onready var asp: AudioStreamPlayer2D = $AudioStreamPlayer2D
@@ -20,6 +22,7 @@ func _physics_process(delta: float) -> void:
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	select_orientation()
 	look_at(get_global_mouse_position())
+	$"../Camera2D/Label".text = str(overheat)
 
 	var direction := Input.get_vector("Left", "Right", "Up", "Down")
 	velocity = direction * SPEED
@@ -28,19 +31,30 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func Shoot(delta: float) -> void:
-	if(Input.is_action_pressed("Shoot") && succ):
-		limit_vaccum = 0
-		for enemy in range.get_overlapping_areas():
-			if(limit_vaccum < 5):
-				absorb_enemy(enemy, delta)
-				limit_vaccum += 1
+	if(Input.is_action_pressed("Shoot") && !overheated):
+		overheat += delta
+		if overheat >= 11:
+			overheated = true
+		if succ:
+			limit_vaccum = 0
+			for enemy in range.get_overlapping_areas():
+				if(limit_vaccum < 5):
+					absorb_enemy(enemy, delta)
+					limit_vaccum += 1
+			capture.emit()
 		if not asp.playing:
 			asp.play()
-		capture.emit()
+		
 	elif(Input.is_action_just_released("Shoot")):
 		limit_vaccum = 0
 		asp.stop()
 		release.emit()
+	else:
+		overheat -= delta * 2
+		if overheat <= 0:
+			overheat = 0
+			if overheated:
+				overheated = false
 
 func select_orientation() -> void:
 	var mouse_dir = get_mouse_relative_dir()
@@ -77,4 +91,9 @@ func select_animation():
 
 func _on_hitbox_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
 	hp -= 1
+	$"../Camera2D/Health".text = str(hp)
+	if hp == 0:
+		$"../Camera2D/ColorRect".visible = true
+		$"../Camera2D/Dead".visible = true
+		get_tree().paused = true
 	area.queue_free()

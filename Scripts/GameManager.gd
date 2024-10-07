@@ -16,6 +16,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	$Camera2D/Date.text = "DAY " + str(date)
 	if date >= 3:
 		var timer = $SlimeTimer
 		timer.wait_time = 2.5
