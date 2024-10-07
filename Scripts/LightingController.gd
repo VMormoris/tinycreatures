@@ -6,10 +6,8 @@ extends Line2D
 
 @onready var ap: AnimationPlayer = $AnimationPlayer
 
-func create(start: Vector2, end: Vector2, diff: Vector2) -> void:
-	print("Creating at: [", start.x, ", ", start.y, "]")
-	print("With endpoint: [", end.x, ", ", end.y, "]")
 
+func create(start: Vector2, end: Vector2, diff: Vector2) -> void:
 	add_point(start)
 	add_point(end)
 	
@@ -36,3 +34,6 @@ func sway_points(normal: Vector2) -> void:
 		
 		var offset = ((get_point_position(idx) + get_point_position(idx - 1)) / 2) + normal * randf_range(-sway, sway)
 		set_point_position(idx, offset)
+
+func _on_timer_timeout() -> void:
+	queue_free()

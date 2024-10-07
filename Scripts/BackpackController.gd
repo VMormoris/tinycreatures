@@ -54,7 +54,7 @@ func add_ammo(color: Color) -> void:
 	ammo = clampi(ammo, 0, 11)
 	magazine.push_back(color)
 	
-func remove_ammo() -> void:
+func remove_ammo() -> Color:
 	ammo -= 1
 	ammo = clampi(ammo, 0, 11)
-	magazine.pop_front()
+	return magazine.pop_front()
