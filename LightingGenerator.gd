@@ -24,13 +24,13 @@ func create_lighting() -> void:
 	for fork in range(0, fork_count):
 		var lighting_instance: Line2D = lighting.instantiate()
 		target = find_target()
-		diff = target - global_position
+		diff = target - position
 		if make_sub_forks:
 			sub_fork_count = diff.length() / 40
 			sub_fork_size = diff.length() / 5
 	
 		normal = Vector2(diff.y, -diff.x).normalized()
-		lighting_instance.create(global_position, target, diff)
+		lighting_instance.create(position, target, diff)
 		lighting_instance.sway_points(normal)
 		add_child(lighting_instance)
 		await get_tree().process_frame
@@ -55,6 +55,6 @@ func sub_forkify(normal: Vector2, point: Vector2) -> void:
 	
 func find_target() -> Vector2:
 	print("Mouse: [", get_global_mouse_position().x, ",", get_global_mouse_position().y, "]")
-	print("Pos: [", global_position.x, ",", global_position.y, "]")
-	var dir = (get_global_mouse_position() - global_position).normalized()
-	return global_position + dir * attack_range
+	print("Pos: [", position.x, ",", position.y, "]")
+	var dir = (get_global_mouse_position() - position).normalized()
+	return position + dir * attack_range
