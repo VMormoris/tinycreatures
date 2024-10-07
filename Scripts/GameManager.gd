@@ -34,7 +34,6 @@ func _on_slime_timer_timeout() -> void:
 			var spawndir = Vector2(horizontal, vertical)
 			
 			var spawnpos = player.position + spawndir * range
-			#print(spawnpos)
 			
 			slime.position = spawnpos
 			slime.player = player

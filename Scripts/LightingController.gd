@@ -6,6 +6,18 @@ extends Line2D
 
 @onready var ap: AnimationPlayer = $AnimationPlayer
 
+func _physics_process(delta):
+	var space_state = get_world_2d().direct_space_state
+	# use global coordinates, not local to node
+	var iterations: int = get_point_count() - 1
+	for idx in range(0, iterations):
+		var curr: Vector2 = to_global(get_point_position(idx))
+		var next: Vector2 = to_global(get_point_position(idx + 1))
+		var query = PhysicsRayQueryParameters2D.create(curr, next)
+		query.collide_with_areas = true
+		var result = space_state.intersect_ray(query)
+		if result.has("collider"):
+			result.collider.queue_free()
 
 func create(start: Vector2, end: Vector2, diff: Vector2) -> void:
 	add_point(start)

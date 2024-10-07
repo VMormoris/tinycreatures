@@ -77,5 +77,4 @@ func select_animation():
 
 func _on_hitbox_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
 	hp -= 1
-	print(hp)
 	area.queue_free()

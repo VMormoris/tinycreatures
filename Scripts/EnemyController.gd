@@ -62,4 +62,3 @@ func select_orientation(dir: Vector2) -> void:
 
 func _on_day_night_transition():
 	chasing = !chasing
-	print(chasing)

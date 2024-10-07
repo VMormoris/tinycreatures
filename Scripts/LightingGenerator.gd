@@ -18,7 +18,7 @@ var target: Vector2
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("Shoot") and backpack.ammo > 0:
+	if Input.is_action_just_pressed("LightingStrike") and backpack.ammo > 0:
 		create_lighting(backpack.remove_ammo())
 	
 func create_lighting(color: Color) -> void:
@@ -57,7 +57,5 @@ func sub_forkify(normal: Vector2, color: Color, point: Vector2) -> void:
 
 	
 func find_target() -> Vector2:
-	print("Mouse: [", get_local_mouse_position().x, ",", get_local_mouse_position().y, "]")
-	print("Pos: [", position.x, ",", position.y, "]")
 	var dir = (get_local_mouse_position() - position).normalized()
 	return position + dir * attack_range
