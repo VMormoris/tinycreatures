@@ -22,12 +22,12 @@ func _physics_process(delta: float) -> void:
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	select_orientation()
 	look_at(get_global_mouse_position())
-	$"../Camera2D/Label".text = str(overheat)
 
 	var direction := Input.get_vector("Left", "Right", "Up", "Down")
 	velocity = direction * SPEED
 	select_animation()
 	Shoot(delta)
+	$"../Camera2D/ProgressBar".value = overheat
 	move_and_slide()
 
 func Shoot(delta: float) -> void:
@@ -35,22 +35,24 @@ func Shoot(delta: float) -> void:
 		overheat += delta
 		if overheat >= 11:
 			overheated = true
-		if succ:
-			limit_vaccum = 0
-			for enemy in range.get_overlapping_areas():
-				if(limit_vaccum < 5):
-					absorb_enemy(enemy, delta)
-					limit_vaccum += 1
-			capture.emit()
-		if not asp.playing:
-			asp.play()
-		
+			asp.stop()
+		else:
+			if succ:
+				limit_vaccum = 0
+				for enemy in range.get_overlapping_areas():
+					if(limit_vaccum < 5):
+						absorb_enemy(enemy, delta)
+						limit_vaccum += 1
+				capture.emit()
+			if not asp.playing:
+				asp.play()
+
 	elif(Input.is_action_just_released("Shoot")):
 		limit_vaccum = 0
 		asp.stop()
 		release.emit()
 	else:
-		overheat -= delta * 2
+		overheat -= delta * 3
 		if overheat <= 0:
 			overheat = 0
 			if overheated:

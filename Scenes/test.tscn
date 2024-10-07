@@ -115,9 +115,13 @@ text = "Disappointment"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Label" type="Label" parent="Camera2D"]
-offset_right = 40.0
-offset_bottom = 23.0
+[node name="ProgressBar" type="ProgressBar" parent="Camera2D"]
+offset_left = -130.0
+offset_top = 61.0
+offset_right = -126.0
+offset_bottom = 88.0
+scale = Vector2(1, 0.64)
+max_value = 11.0
 
 [node name="SlimeTimer" type="Timer" parent="."]
 wait_time = 5.0
