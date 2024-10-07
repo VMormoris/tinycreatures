@@ -17,7 +17,8 @@ func _physics_process(delta):
 		query.collide_with_areas = true
 		var result = space_state.intersect_ray(query)
 		if result.has("collider"):
-			result.collider.queue_free()
+			if result.collider.get_meta("self") != null:
+				result.collider.get_meta("self").HP -= 1
 
 func create(start: Vector2, end: Vector2, diff: Vector2) -> void:
 	add_point(start)

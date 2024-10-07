@@ -1,3 +1,4 @@
+class_name EnemyController
 extends Area2D
 
 enum ATTITUDE {Agressive, Passive, Scared}
@@ -12,6 +13,7 @@ var COLOR_PALETTE: Array[Color] = [
 
 @export var SPEED: float = 60.0
 @export var JUMP_VELOCIY: float = -10.0
+@export var HP: int = 1
 @export var PERSONALITY: ATTITUDE = ATTITUDE.Agressive
 
 @onready var sr: AnimatedSprite2D = $AnimatedSprite2D
@@ -32,10 +34,13 @@ func _ready() -> void:
 	sr.modulate = COLOR_PALETTE[idx]
 	var callable = Callable(self, "_on_day_night_transition")
 	$"../Day_Night".connect("timeout", callable, 0)
+	set_meta("self", self)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	chase_or_run_from_player(delta)
+	if HP <= 0:
+		queue_free()
 
 func chase_or_run_from_player(delta: float) -> void:
 	dir = (player.position - position).normalized()
