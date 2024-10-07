@@ -30,16 +30,13 @@ func _ready() -> void:
 		player = get_node("%Player")
 	var idx = randi_range(0, COLOR_PALETTE.size() - 1)
 	sr.modulate = COLOR_PALETTE[idx]
+	var callable = Callable(self, "_on_day_night_transition")
+	$"../Day_Night".connect("timeout", callable, 0)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	match PERSONALITY:
-		ATTITUDE.Agressive:
-			chase_or_run_from_player(delta)
-		#ATTITUDE.Passive:
-		#	print("Passive")
-#		
-	
+	chase_or_run_from_player(delta)
+
 func chase_or_run_from_player(delta: float) -> void:
 	dir = (player.position - position).normalized()
 	select_orientation(dir)
@@ -62,3 +59,7 @@ func select_orientation(dir: Vector2) -> void:
 		sr.flip_h = true
 	else:
 		sr.flip_h = false
+
+func _on_day_night_transition():
+	chasing = !chasing
+	print(chasing)
